@@ -15,9 +15,7 @@ db.on("error", console.error.bind(console, "connection error:"));
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-// var newsletterRouter = require("./routes/newsletter");
-// var adminRouter = require("./routes/admin");
-// var articleRouter = require("./routes/article");
+
 
 var app = express();
 
@@ -27,17 +25,19 @@ app.set("view engine", "pug");
 
 // app.use(logger("dev"));
 app.use(express.json());
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", req.headers.origin);
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   res.header("Access-Control-Allow-Headers", "*");
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-//   next();
-// });
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  next();
+});
+
 // app.use(
 //   cors({
 //     origin: ["https://meble-klasyczne.herokuapp.com/"],

@@ -41,7 +41,7 @@ router.post("/register", (req, res) => {
   } else {
     User.findOne({ email: email }).then((user) => {
       if (user) {
-        errors.push({ message: "Uzytkownik o podanym meilu istnieje" });
+        errors.push({ message: "Uzytkownik o podanym mailu istnieje" });
         res.json({
           errors,
           name,
