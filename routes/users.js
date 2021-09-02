@@ -96,7 +96,7 @@ router.post("/login", (req, res) => {
         if (!user) {
           errors.push({ message: "błędny login lub hasło" });
           res.json({
-            islogged: null,
+            islogged: false,
             accessLevel: 0,
             authenticated: false,
             errors,
