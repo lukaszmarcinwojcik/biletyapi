@@ -18,15 +18,15 @@ router.post("/register", (req, res) => {
   let errors = [];
 
   if (!name || !surname || !email || !password || !password2) {
-    errors.push({ message: "Prosze wypelnic wszystkie pola" });
+    errors.push({ message: "Proszę wypełnić wszystkie pola" });
   }
 
   if (password !== password2) {
-    errors.push({ message: "Hasla roznia sie od siebie" });
+    errors.push({ message: "Hasła różnią się od siebie" });
   }
 
   if (password.length < 6) {
-    errors.push({ message: "Haslo musi zawierac conajmniej 6 znaków" });
+    errors.push({ message: "Hasło musi zawierać conajmniej 6 znaków" });
   }
 
   if (errors.length > 0) {
@@ -41,7 +41,7 @@ router.post("/register", (req, res) => {
   } else {
     User.findOne({ email: email }).then((user) => {
       if (user) {
-        errors.push({ message: "Uzytkownik o podanym mailu istnieje" });
+        errors.push({ message: "Użytkownik o podanym emailu istnieje" });
         res.json({
           errors,
           name,
@@ -61,7 +61,7 @@ router.post("/register", (req, res) => {
         newUser
           .save()
           .then((user) => {
-            res.json({ message: "Udalo Ci sie zarejestrowac" });
+            res.json({ message: "Udało Ci się zarejestrować" });
           })
           .catch((err) => console.log(err));
       }
@@ -78,10 +78,10 @@ router.post("/login", (req, res) => {
   let errors = [];
 
   if (!email) {
-    errors.push({ message: "Prosze wpisac email" });
+    errors.push({ message: "Proszę wpisać email" });
   }
   if (!password) {
-    errors.push({ message: "Prosze wpisac haslo" });
+    errors.push({ message: "Proszę wpisać hasło" });
   }
 
   if (errors.length > 0) {
@@ -94,7 +94,7 @@ router.post("/login", (req, res) => {
     const user = User.findOne({ email: email, password: hashpassword }).then(
       (user) => {
         if (!user) {
-          errors.push({ message: "błędny login lub hasło" });
+          errors.push({ message: "Błędny login lub hasło" });
           res.json({
             islogged: false,
             accessLevel: 0,
@@ -113,7 +113,7 @@ router.post("/login", (req, res) => {
           user.password = null;
           res.json({
             islogged: true,
-            message: "Udalo CI sie zalogować!",
+            message: "Udało Ci się zalogować!",
             accessLevel,
             authenticated: true,
             accessToken: accessToken,
@@ -129,7 +129,7 @@ router.post("/login", (req, res) => {
 
 router.get("/logout", (req, res) => {
   res.json({
-    message: "Zostales wylogowany",
+    message: "Zostałeś wylogowany",
     islogged: false,
     accessLevel: 0,
   });
